@@ -118,7 +118,8 @@ our %EXPORT_TAGS = ( 'all' => [ @EXPORT_OK ] );
 our $VERSION = 0.1;
 
 use Data::Dumper;
-use Array::DeepUtils qw(:all);
+#use Array::DeepUtils qw(:all);
+use Array::DeepUtils;
 use Carp;
 
 # The following operators will be generated automatically:
@@ -165,7 +166,7 @@ available: !
 sub not # Not, mapped to '!'.
 {
     my $data = [@{$_[0]}];
-    unary($data, sub { return 0+ !$_[0] });
+    Array::DeepUtils::unary($data, sub { return 0+ !$_[0] });
     return bless $data;
 }
 
@@ -263,7 +264,7 @@ sub outer
     {
         my ($self, $other) = @_;
         my $result = ref($right) ? [@$right] : [$right];
-        binary([@$left], $result, sub { $_[0] | $_[1] }, 1);
+        Array::DeepUtils::binary([@$left], $result, sub { $_[0] | $_[1] }, 1);
         return bless $result;
     }
     # If the right side argument is a reference to a subroutine we are at
@@ -549,7 +550,7 @@ sub in
 sub int 
 {
     my $data = [@{$_[0]}];
-    unary($data, sub { return int($_[0]) });
+    Array::DeepUtils::unary($data, sub { return int($_[0]) });
     return bless $data;
 }
 
@@ -584,7 +585,7 @@ sub index
     croak 'index: argument is not an APX-object: ', ref($b), "\n" 
         unless ref($b) eq __PACKAGE__;
 
-    return bless idx([@$a], [@$b]);
+    return bless Array::DeepUtils::idx([@$a], [@$b]);
 }
 
 =head2 remove
@@ -666,14 +667,14 @@ sub rho
 
     if (!defined($control)) # Return a structure object
     {
-        return bless shape([@$data]);
+        return bless Array::DeepUtils::shape([@$data]);
     }
     else
     {
         croak "rho: Control structure is not an APX-object!" 
             if ref($control) ne __PACKAGE__;
 
-        return bless reshape([@$data], [@$control]);
+        return bless Array::DeepUtils::reshape([@$data], [@$control]);
     }
 }
 
@@ -797,7 +798,7 @@ sub slice
     croak 'slice: argument is not an APX-object: ', ref($control), "\n" 
         unless ref($control) eq __PACKAGE__;
 
-    return bless dcopy([@$data], [@$control]);
+    return bless Array::DeepUtils::dcopy([@$data], [@$control]);
 }
 
 =head2 strip
@@ -895,7 +896,7 @@ sub _binary {
     }
 
     # no eval because _binary will be called in an eval {}
-    binary($_[0], $_[1], $func);
+    Array::DeepUtils::binary($_[0], $_[1], $func);
 
     return 1;
 }
