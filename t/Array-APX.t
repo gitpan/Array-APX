@@ -73,7 +73,7 @@ $x = iota(3) / 2;
 is_deeply([@$x], [0, .5, 1], 'APX / scalar');
 
 $x = 2 / (iota(3) + 1);
-is_deeply([@$x], [2, 1, 0.666666666666667], 'scalar / APX');
+is_deeply([@$x], [2, 1, 2 / 3], 'scalar / APX');
 
 $x = iota(3) / dress([3, 2, 1]);
 is_deeply([@$x], [0, .5, 2], 'APX / APX');
