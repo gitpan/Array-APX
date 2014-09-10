@@ -193,8 +193,8 @@ is_deeply([@$x], [0, 1, 2], 'int');
 $x = iota(27)->rho(dress([3, 3, 3]))->collapse();
 is_deeply([@$x], [0 .. 26], 'collapse');
 
-$x = dress([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5])->grade();
-is_deeply([@$x], [3, 1, 6, 9, 0, 2, 8, 4, 10, 7, 5], 'grade');
+$x = dress([3, 1, 4, 5, 9, 2, 6])->grade();
+is_deeply([@$x], [1, 5, 0, 2, 3, 6, 4], 'grade');
 
 $x = dress([[1, 3], [4, 5]])->index(dress([[1, 2, 3], [4, 5, 6], [7, 8, 9]]));
 is_deeply([@$x], [[[0, 0], [0, 2]], [[1, 0], [1, 1]]], 'index');

@@ -8,7 +8,7 @@ Array::APX - Array Programming eXtensions
 
 =head1 VERSION
 
-This document refers to version 0.1 of Array::APX
+This document refers to version 0.4 of Array::APX
 
 =head1 SYNOPSIS
 
@@ -115,7 +115,7 @@ our @ISA         = qw(Exporter);
 our @EXPORT_OK   = qw(dress iota);
 our %EXPORT_TAGS = ( 'all' => [ @EXPORT_OK ] );
 
-our $VERSION = 0.1;
+our $VERSION = 0.4;
 
 use Data::Dumper;
 #use Array::DeepUtils qw(:all);
